@@ -1,0 +1,55 @@
+
+# Define list of available items and their corresponding prices 
+items = ["pepsi", "Candy", "lays Chips", "cheetos chips","crossiant","cinnamon rolls","chocolate milkshake","water","brownie slices","loaker wafers"]  
+prices = [1.00, 0.75, 1.50, 0.50,2.00,2.50,3.00,2.00,4.00,1.00] 
+ 
+# Print menu of available items 
+print("Welcome to the Vending Machine!") 
+print("Available items:") 
+for i in range(len(items)): 
+  print(f"{i+1}. {items[i]} - ${prices[i]:.2f}") 
+ 
+# Initialize balance to 0 
+balance = 0 
+ 
+while True:
+  # Prompt user to enter code for desired item 
+  code = int(input("Enter code for desired item or 0 to view balance: ")) 
+ 
+  # Check if code is valid 
+  if code > 0 and code <= len(items): 
+    # Prompt user to enter amount of money 
+    money = float(input("Enter amount of money: $")) 
+ 
+    # Check if user has entered enough money 
+    if money >= prices[code-1]: 
+      # Calculate and return change 
+      change = money - prices[code-1] 
+      print(f"Dispensing {items[code-1]}...") 
+      print(f"Your change is ${change:.2f}.") 
+ 
+      # Add money to balance 
+      balance += money
+      
+      # Ask the user if they want to buy another item
+      while True:
+        additional_item = input("Do you want to buy another item? (y/n)")
+        if additional_item.lower() == "y":
+          # Go back to the beginning of the initial while loop to allow the user to buy another item
+          break
+        elif additional_item.lower() == "n":
+          # End the program
+          print("Thank you for using the vending machine. Goodbye!")
+          exit()
+        else:
+          # Display error message if user inputs an invalid response
+          print("Invalid input. Please enter y or n.")
+    else: 
+      # Display error message if user does not have enough money 
+      print("Insufficient funds. Please enter more money.") 
+  elif code == 0: 
+    # Display current balance 
+    print(f"Your current balance is ${balance:.2f}.") 
+  else: 
+    # Display error message if code is invalid 
+    print("Invalid code. Please try again.")
